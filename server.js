@@ -16,7 +16,7 @@ mongoose.connect("mongodb://localhost:27017/MR-DATA", {
 });
 
 app.use("/auth", require("./routes/auth"))
-app.use("/test", require("./routes/auth"))
+app.use("/test", require("./routes/test.routes"))
 
 // Start Server
 app.listen(5000, () => {
