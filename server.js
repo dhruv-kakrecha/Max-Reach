@@ -7,18 +7,18 @@ const bodyParser = require("body-parser");
 dotenv.config();
 
 const app = express();
-const cors = require('cors');
-
+app.use(bodyParser.json());
 app.use(cors());
 
-app.listen(8000, () => {
-    console.log("server is start now http://localhost:8000");
-})
+mongoose.connect("mongodb://localhost:27017/MR-DATA", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
-app.use("/", require("./routes/appRoutes"));
+app.use("/auth", require("./routes/auth"))
+app.use("/test", require("./routes/auth"))
 
-app.get('/', (req, res) => {
-
-    const { name } = req.query
-    res.json({ status: true, message: `welcome ${name || "dhruv"}` });
-})
+// Start Server
+app.listen(5000, () => {
+    console.log("Server running on http://localhost:5000/");
+});
